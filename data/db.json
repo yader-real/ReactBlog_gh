@@ -1,0 +1,46 @@
+{
+  "posts": [
+    {
+      "id": 9,
+      "title": "Server Components",
+      "datetime": "February 10, 2023 9:45:30 AM",
+      "body": "We announced an experimental demo of React Server Components (RSC) in December 2020. Since then we’ve been finishing up its dependencies in React 18, and working on changes inspired by experimental feedback.\n\nIn particular, we’re abandoning the idea of having forked I/O libraries (eg react-fetch), and instead adopting an async/await model for better compatibility. This doesn’t technically block RSC’s release because you can also use routers for data fetching. Another change is that we’re also moving away from the file extension approach in favor of annotating boundaries.\n\nWe’re working together with Vercel and Shopify to unify bundler support for shared semantics in both Webpack and Vite. Before launch, we want to make sure that the semantics of RSCs are the same across the whole React ecosystem. This is the major blocker for reaching stable"
+    },
+    {
+      "id": 12,
+      "title": "Asset Loading",
+      "datetime": "February 10, 2023 9:46:48 AM",
+      "body": "Currently, assets like scripts, external styles, fonts, and images are typically preloaded and loaded using external systems. This can make it tricky to coordinate across new environments like streaming, server components, and more. We’re looking at adding APIs to preload and load deduplicated external assets through React APIs that work in all React environments.\n\nWe’re also looking at having these support Suspense so you can have images, CSS, and fonts that block display until they’re loaded but don’t block streaming and concurrent rendering. This can help avoid “popcorning“ as the visuals pop and layout shifts."
+    },
+    {
+      "id": 13,
+      "title": "Static Server Rendering Optimizations",
+      "datetime": "February 10, 2023 9:47:53 AM",
+      "body": "Static Site Generation (SSG) and Incremental Static Regeneration (ISR) are great ways to get performance for cacheable pages, but we think we can add features to improve performance of dynamic Server Side Rendering (SSR) – especially when most but not all of the content is cacheable. We’re exploring ways to optimize server rendering utilizing compilation and static passes."
+    },
+    {
+      "id": 14,
+      "title": "React Optimizing Compiler",
+      "datetime": "February 10, 2023 9:48:50 AM",
+      "body": "We gave an early preview of React Forget at React Conf 2021. It’s a compiler that automatically generates the equivalent of useMemo and useCallback calls to minimize the cost of re-rendering, while retaining React’s programming model.\n\nRecently, we finished a rewrite of the compiler to make it more reliable and capable. This new architecture allows us to analyze and memoize more complex patterns such as the use of local mutations, and opens up many new compile-time optimization opportunities beyond just being on par with memoization hooks.\n\nWe’re also working on a playground for exploring many aspects of the compiler. While the goal of the playground is to make development of the compiler easier, we think that it will make it easier to try it out and build intuition for what the compiler does. It reveals various insights into how it works under the hood, and live renders the compiler’s outputs as you type. This will be shipped together with the compiler when it’s released."
+    },
+    {
+      "id": 15,
+      "title": "Offscreen",
+      "datetime": "February 10, 2023 9:49:37 AM",
+      "body": "Today, if you want to hide and show a component, you have two options. One is to add or remove it from the tree completely. The problem with this approach is that the state of your UI is lost each time you unmount, including state stored in the DOM, like scroll position.\n\nThe other option is to keep the component mounted and toggle the appearance visually using CSS. This preserves the state of your UI, but it comes at a performance cost, because React must keep rendering the hidden component and all of its children whenever it receives new updates.\n\nOffscreen introduces a third option: hide the UI visually, but deprioritize its content. The idea is similar in spirit to the content-visibility CSS property: when content is hidden, it doesn’t need to stay in sync with the rest of the UI. React can defer the rendering work until the rest of the app is idle, or until the content becomes visible again."
+    },
+    {
+      "id": 16,
+      "title": "Transition Tracing",
+      "datetime": "February 10, 2023 9:50:24 AM",
+      "body": "Currently, React has two profiling tools. The original Profiler shows an overview of all the commits in a profiling session. For each commit, it also shows all components that rendered and the amount of time it took for them to render. We also have a beta version of a Timeline Profiler introduced in React 18 that shows when components schedule updates and when React works on these updates. Both of these profilers help developers identify performance problems in their code."
+    },
+    {
+      "id": 17,
+      "title": "New React Docs",
+      "datetime": "February 10, 2023 9:51:11 AM",
+      "body": "Last year, we announced the beta version of the new React documentation website. The new learning materials teach Hooks first and has new diagrams, illustrations, as well as many interactive examples and challenges. We took a break from that work to focus on the React 18 release, but now that React 18 is out, we’re actively working to finish and ship the new documentation.\n\nWe are currently writing a detailed section about effects, as we’ve heard that is one of the more challenging topics for both new and experienced React users. Synchronizing with Effects is the first published page in the series, and there are more to come in the following weeks. When we first started writing a detailed section about effects, we’ve realized that many common effect patterns can be simplified by adding a new primitive to React. We’ve shared some initial thoughts on that in the useEvent RFC. It is currently in early research, and we are still iterating on the idea. We appreciate the community’s comments on the RFC so far, as well as the feedback and contributions to the ongoing documentation rewrite. We’d specifically like to thank Harish Kumar for submitting and reviewing many improvements to the new website implementation."
+    }
+  ]
+}
